@@ -8,6 +8,7 @@ import {
 import Contact from "./pages/Contact"
 
 import Register from './pages/RegisterHandler';
+import Single from './pages/Single';
 
 const bar= document.getElementById('bar');
 const close= document.getElementById('close');
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
 {
   path:"/*",
   element: <Home/>
+},
+{
+  path:"/single",
+  element: <Single/>
 }
 ])
 
