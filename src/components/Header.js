@@ -1,34 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
-  const barHandler = (e) =>{
-    const bar= document.getElementById('bar');
-const close= document.getElementById('close');
-const nav=document.getElementById('navbar');
+  const navigate = useNavigate();
+  const auth = localStorage.getItem("user");
+  const logout = () => {
+    localStorage.clear();
+    navigate("/signup");
+  };
 
+  const navRef = useRef(null);
 
-if(bar){
-    bar.addEventListener('click',()=>{
-        nav.classList.add('active');
-    })
-}
-
-if(close){
-    close.addEventListener('click',()=>{
-        nav.classList.remove('active');
-    })
-}
+  function toggleNav() {
+    navRef.current.classList.toggle("active");
   }
+
   return (
     <section id="header">
-      <Link to="/"
+      <Link
+        to="/"
         style={{ textDecoration: "none", color: "black", fontSize: "2rem" }}
       >
         Unicago
       </Link>
       <div>
-        <ul id="navbar">
+        <ul id="navbar" ref={navRef}>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -38,14 +34,19 @@ if(close){
           <li>
             <Link to="/Contact">Contact</Link>
           </li>
-          <li>
-            <Link to="/register">Log in/Register</Link>
-          </li>
+          
+            {auth ? <li>
+            <Link to="/register" onClick={logout}>Log Out</Link></li>
+             : 
+             <li><Link to="/register" >Login/ Register
+              </Link></li>
+            }
+          
           <li id="lg-bag">
             <i class="far fa-shopping-bag"></i>
           </li>
           <Link to="#" id="close">
-            <i class="far fa-times"></i>
+            <i class="far fa-times" onClick={toggleNav}></i>
           </Link>
         </ul>
       </div>
@@ -53,7 +54,7 @@ if(close){
         <Link to="/">
           <i class="far fa-shopping-bag"></i>
         </Link>
-        <i id="bar" class="fas fa-outdent" onClick={barHandler}></i>
+        <i id="bar" class="fas fa-outdent" onClick={toggleNav}></i>
       </div>
     </section>
   );

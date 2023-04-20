@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Product() {
+    
   return (
     <section id="product1" class="section-p1">
         <h2>Featured Products</h2>
@@ -9,7 +10,7 @@ function Product() {
         <div class="pro-container">
             <div class="pro">
                 <Link to="/single">
-                <img src="img/product/cart1.jpg" alt=""/>
+                <img src={"img/product/"+"cart1.jpg"} alt=""/>
                 <div class="des">
                     <span>adidas</span>
                     <h5>Cartoon Astronaut T-shirts</h5>
